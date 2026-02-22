@@ -1,0 +1,377 @@
+omkhadka@csa1:~/om-khadka-cs455/extra/pa1$ ./pa1_automation.sh
+RTT Measurements:
+Testing RTT: 1 bytes...
+Connected to 10.239.123.179:58005
+CSP Sent: s rtt 10 1 0.0
+CSP Response: 200 OK: Ready
+
+Starting RTT measurements...
+Probes: 10, Payload Size: 1 bytes
+Probe 1: RTT = 1.61 ms
+Probe 2: RTT = 1.21 ms
+Probe 3: RTT = 1.39 ms
+Probe 4: RTT = 1.46 ms
+Probe 5: RTT = 1.73 ms
+Probe 6: RTT = 1.46 ms
+Probe 7: RTT = 1.69 ms
+Probe 8: RTT = 2.10 ms
+Probe 9: RTT = 1.41 ms
+Probe 10: RTT = 1.72 ms
+
+CTP Response: 200 OK: Closing Connection
+
+==================================================
+RESULTS
+==================================================
+Avg RTT: 1.58 ms
+Min RTT: 1.21 ms
+Max RTT: 2.10 ms
+Saved to rtt_data_1bytes.csv
+Connection closed
+Testing RTT: 100 bytes...
+Connected to 10.239.123.179:58005
+CSP Sent: s rtt 10 100 0.0
+CSP Response: 200 OK: Ready
+
+Starting RTT measurements...
+Probes: 10, Payload Size: 100 bytes
+Probe 1: RTT = 4.21 ms
+Probe 2: RTT = 2.83 ms
+Probe 3: RTT = 4.17 ms
+Probe 4: RTT = 4.12 ms
+Probe 5: RTT = 2.42 ms
+Probe 6: RTT = 2.44 ms
+Probe 7: RTT = 2.07 ms
+Probe 8: RTT = 3.64 ms
+Probe 9: RTT = 2.02 ms
+Probe 10: RTT = 2.10 ms
+
+CTP Response: 200 OK: Closing Connection
+
+==================================================
+RESULTS
+==================================================
+Avg RTT: 3.00 ms
+Min RTT: 2.02 ms
+Max RTT: 4.21 ms
+Saved to rtt_data_100bytes.csv
+Connection closed
+Testing RTT: 200 bytes...
+Connected to 10.239.123.179:58005
+CSP Sent: s rtt 10 200 0.0
+CSP Response: 200 OK: Ready
+
+Starting RTT measurements...
+Probes: 10, Payload Size: 200 bytes
+Probe 1: RTT = 2.68 ms
+Probe 2: RTT = 2.02 ms
+Probe 3: RTT = 2.06 ms
+Probe 4: RTT = 2.51 ms
+Probe 5: RTT = 2.33 ms
+Probe 6: RTT = 2.07 ms
+Probe 7: RTT = 3.57 ms
+Probe 8: RTT = 2.43 ms
+Probe 9: RTT = 2.09 ms
+Probe 10: RTT = 2.12 ms
+
+CTP Response: 200 OK: Closing Connection
+
+==================================================
+RESULTS
+==================================================
+Avg RTT: 2.39 ms
+Min RTT: 2.02 ms
+Max RTT: 3.57 ms
+Saved to rtt_data_200bytes.csv
+Connection closed
+Testing RTT: 400 bytes...
+Connected to 10.239.123.179:58005
+CSP Sent: s rtt 10 400 0.0
+CSP Response: 200 OK: Ready
+
+Starting RTT measurements...
+Probes: 10, Payload Size: 400 bytes
+Probe 1: RTT = 1.47 ms
+Probe 2: RTT = 1.64 ms
+Probe 3: RTT = 1.65 ms
+Probe 4: RTT = 1.75 ms
+Probe 5: RTT = 1.74 ms
+Probe 6: RTT = 1.73 ms
+Probe 7: RTT = 2.05 ms
+Probe 8: RTT = 2.21 ms
+Probe 9: RTT = 3.58 ms
+Probe 10: RTT = 2.22 ms
+
+CTP Response: 200 OK: Closing Connection
+
+==================================================
+RESULTS
+==================================================
+Avg RTT: 2.00 ms
+Min RTT: 1.47 ms
+Max RTT: 3.58 ms
+Saved to rtt_data_400bytes.csv
+Connection closed
+Testing RTT: 800 bytes...
+Connected to 10.239.123.179:58005
+CSP Sent: s rtt 10 800 0.0
+CSP Response: 200 OK: Ready
+
+Starting RTT measurements...
+Probes: 10, Payload Size: 800 bytes
+Probe 1: RTT = 2.56 ms
+Probe 2: RTT = 1.48 ms
+Probe 3: RTT = 1.52 ms
+Probe 4: RTT = 2.06 ms
+Probe 5: RTT = 2.14 ms
+Probe 6: RTT = 1.49 ms
+Probe 7: RTT = 1.43 ms
+Probe 8: RTT = 1.45 ms
+Probe 9: RTT = 1.46 ms
+Probe 10: RTT = 1.49 ms
+
+CTP Response: 200 OK: Closing Connection
+
+==================================================
+RESULTS
+==================================================
+Avg RTT: 1.71 ms
+Min RTT: 1.43 ms
+Max RTT: 2.56 ms
+Saved to rtt_data_800bytes.csv
+Connection closed
+Testing RTT: 1000 bytes...
+Connected to 10.239.123.179:58005
+CSP Sent: s rtt 10 1000 0.0
+CSP Response: 200 OK: Ready
+
+Starting RTT measurements...
+Probes: 10, Payload Size: 1000 bytes
+Probe 1: RTT = 4.12 ms
+Probe 2: RTT = 3.19 ms
+Probe 3: RTT = 3.04 ms
+Probe 4: RTT = 1.91 ms
+Probe 5: RTT = 2.37 ms
+Probe 6: RTT = 2.08 ms
+Probe 7: RTT = 1.91 ms
+Probe 8: RTT = 1.60 ms
+Probe 9: RTT = 1.92 ms
+Probe 10: RTT = 1.95 ms
+
+CTP Response: 200 OK: Closing Connection
+
+==================================================
+RESULTS
+==================================================
+Avg RTT: 2.41 ms
+Min RTT: 1.60 ms
+Max RTT: 4.12 ms
+Saved to rtt_data_1000bytes.csv
+Connection closed
+
+Throughput Measurements:
+Testing Throughput: 1024 bytes...
+Connected to 10.239.123.179:58005
+CSP Sent: s tput 10 1024 0.0
+CSP Response: 200 OK: Ready
+
+Starting TPUT measurements...
+Probes: 10, Payload Size: 1024 bytes
+Probe 1: RTT = 1.94 ms
+Probe 2: RTT = 1.61 ms
+Probe 3: RTT = 2.15 ms
+Probe 4: RTT = 1.57 ms
+Probe 5: RTT = 2.11 ms
+Probe 6: RTT = 1.68 ms
+Probe 7: RTT = 1.57 ms
+Probe 8: RTT = 1.89 ms
+Probe 9: RTT = 1.58 ms
+Probe 10: RTT = 1.57 ms
+
+CTP Response: 200 OK: Closing Connection
+
+==================================================
+RESULTS
+==================================================
+Total Time: 0.0179 sec
+Total Bytes: 10291 bytes
+Throughput: 4606.02 kbps (4.6060 Mbps)
+Saved to tput_data_1024bytes.csv
+Connection closed
+Testing Throughput: 2048 bytes...
+Connected to 10.239.123.179:58005
+CSP Sent: s tput 10 2048 0.0
+CSP Response: 200 OK: Ready
+
+Starting TPUT measurements...
+Probes: 10, Payload Size: 2048 bytes
+Probe 1: RTT = 1.97 ms
+Probe 2: RTT = 2.33 ms
+Probe 3: RTT = 1.78 ms
+Probe 4: RTT = 1.73 ms
+Probe 5: RTT = 2.26 ms
+Probe 6: RTT = 1.74 ms
+Probe 7: RTT = 2.12 ms
+Probe 8: RTT = 2.18 ms
+Probe 9: RTT = 2.11 ms
+Probe 10: RTT = 2.53 ms
+
+CTP Response: 200 OK: Closing Connection
+
+==================================================
+RESULTS
+==================================================
+Total Time: 0.0211 sec
+Total Bytes: 20531 bytes
+Throughput: 7789.18 kbps (7.7892 Mbps)
+Saved to tput_data_2048bytes.csv
+Connection closed
+Testing Throughput: 4096 bytes...
+Connected to 10.239.123.179:58005
+CSP Sent: s tput 10 4096 0.0
+CSP Response: 200 OK: Ready
+
+Starting TPUT measurements...
+Probes: 10, Payload Size: 4096 bytes
+Probe 1: RTT = 2.34 ms
+Probe 2: RTT = 0.04 ms
+Probe 3: RTT = 0.02 ms
+Probe 4: RTT = 0.01 ms
+Probe 5: RTT = 0.02 ms
+Probe 6: RTT = 0.01 ms
+Probe 7: RTT = 0.01 ms
+Probe 8: RTT = 0.01 ms
+Probe 9: RTT = 0.01 ms
+Probe 10: RTT = 0.01 ms
+
+CTP Response: 
+
+==================================================
+RESULTS
+==================================================
+Total Time: 0.0026 sec
+Total Bytes: 41011 bytes
+Throughput: 124725.90 kbps (124.7259 Mbps)
+Saved to tput_data_4096bytes.csv
+Connection closed
+Testing Throughput: 8192 bytes...
+Connected to 10.239.123.179:58005
+CSP Sent: s tput 10 8192 0.0
+CSP Response: 200 OK: Ready
+
+Starting TPUT measurements...
+Probes: 10, Payload Size: 8192 bytes
+Probe 1: RTT = 13.63 ms
+Error: [Errno 104] Connection reset by peer
+Connection closed
+Testing Throughput: 16384 bytes...
+Connected to 10.239.123.179:58005
+CSP Sent: s tput 10 16384 0.0
+CSP Response: 200 OK: Ready
+
+Starting TPUT measurements...
+Probes: 10, Payload Size: 16384 bytes
+Probe 1: RTT = 4.56 ms
+Probe 2: RTT = 2.50 ms
+Error: [Errno 104] Connection reset by peer
+Connection closed
+Testing Throughput: 32768 bytes...
+Connected to 10.239.123.179:58005
+CSP Sent: s tput 10 32768 0.0
+CSP Response: 200 OK: Ready
+
+Starting TPUT measurements...
+Probes: 10, Payload Size: 32768 bytes
+Probe 1: RTT = 2.89 ms
+Probe 2: RTT = 0.05 ms
+Probe 3: RTT = 0.02 ms
+Error: [Errno 104] Connection reset by peer
+Connection closed
+
+Server Delay Tests:
+Testing Delay: 0 sec...
+Connected to 10.239.123.179:58005
+CSP Sent: s rtt 10 100 0.0
+CSP Response: 200 OK: Ready
+
+Starting RTT measurements...
+Probes: 10, Payload Size: 100 bytes
+Probe 1: RTT = 1.39 ms
+Probe 2: RTT = 1.74 ms
+Probe 3: RTT = 1.31 ms
+Probe 4: RTT = 2.06 ms
+Probe 5: RTT = 1.31 ms
+Probe 6: RTT = 1.26 ms
+Probe 7: RTT = 1.26 ms
+Probe 8: RTT = 1.35 ms
+Probe 9: RTT = 1.43 ms
+Probe 10: RTT = 1.15 ms
+
+CTP Response: 200 OK: Closing Connection
+
+==================================================
+RESULTS
+==================================================
+Avg RTT: 1.43 ms
+Min RTT: 1.15 ms
+Max RTT: 2.06 ms
+Saved to rtt_data_100bytes.csv
+Connection closed
+Testing Delay: 0.1 sec...
+Connected to 10.239.123.179:58005
+CSP Sent: s rtt 10 100 0.1
+CSP Response: 200 OK: Ready
+
+Starting RTT measurements...
+Probes: 10, Payload Size: 100 bytes
+Probe 1: RTT = 101.87 ms
+Probe 2: RTT = 103.10 ms
+Probe 3: RTT = 104.96 ms
+Probe 4: RTT = 102.20 ms
+Probe 5: RTT = 102.04 ms
+Probe 6: RTT = 102.17 ms
+Probe 7: RTT = 102.14 ms
+Probe 8: RTT = 102.19 ms
+Probe 9: RTT = 102.08 ms
+Probe 10: RTT = 101.97 ms
+
+CTP Response: 200 OK: Closing Connection
+
+==================================================
+RESULTS
+==================================================
+Avg RTT: 102.47 ms
+Min RTT: 101.87 ms
+Max RTT: 104.96 ms
+Saved to rtt_data_100bytes.csv
+Connection closed
+Testing Delay: 0.5 sec...
+Connected to 10.239.123.179:58005
+CSP Sent: s rtt 10 100 0.5
+CSP Response: 200 OK: Ready
+
+Starting RTT measurements...
+Probes: 10, Payload Size: 100 bytes
+Probe 1: RTT = 502.92 ms
+Probe 2: RTT = 502.74 ms
+Probe 3: RTT = 505.83 ms
+Probe 4: RTT = 503.71 ms
+Probe 5: RTT = 507.55 ms
+Probe 6: RTT = 502.81 ms
+Probe 7: RTT = 504.08 ms
+Probe 8: RTT = 506.39 ms
+Probe 9: RTT = 502.02 ms
+Probe 10: RTT = 502.28 ms
+
+CTP Response: 200 OK: Closing Connection
+
+==================================================
+RESULTS
+==================================================
+Avg RTT: 504.03 ms
+Min RTT: 502.02 ms
+Max RTT: 507.55 ms
+Saved to rtt_data_100bytes.csv
+Connection closed
+
+Done
