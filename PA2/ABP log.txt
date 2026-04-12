@@ -1,0 +1,121 @@
+omimahomie@LAPTOP-CEUFRM7P:~/cs455/PA2$ java -cp PA2_helper/PA2-Java/ Project
+-- * Network Simulator v1.0 * --
+Enter number of messages to simulate (> 0): [10] 10
+Enter packet loss probability (0.0 for no loss): [0.0] 0.1
+Enter packet corruption probability (0.0 for no corruption): [0.0] 0.1
+Enter average time between messages from sender's layer 5 (> 0.0): [1000] 100
+Enter window size (> 0): [8] 1
+Enter retransmission timeout (>0.0) [15.0] 15
+Enter trace level (>= 0): [0] 2
+Enter random seed: [0] 12537980
+
+EVENT time: 137.32718894009219  type: 1  entity: 0
+
+EVENT time: 144.75630970183417  type: 2  entity: 1
+
+EVENT time: 148.32142094180122  type: 2  entity: 0
+
+EVENT time: 186.0957670827357  type: 1  entity: 0
+
+EVENT time: 195.73842585528126  type: 2  entity: 1
+
+EVENT time: 201.0957670827357  type: 0  entity: 0
+
+EVENT time: 202.57316812646874  type: 2  entity: 0
+
+EVENT time: 207.94122135074926  type: 2  entity: 1
+
+EVENT time: 209.42216254158149  type: 2  entity: 0
+aInput(): Duplicate ACK received, ignoring
+
+EVENT time: 376.6228217413862  type: 1  entity: 0
+
+EVENT time: 381.9537644581439  type: 2  entity: 1
+
+EVENT time: 390.5241248817408  type: 2  entity: 0
+
+EVENT time: 562.4561296426283  type: 1  entity: 0
+
+EVENT time: 571.0383007293924  type: 2  entity: 1
+
+EVENT time: 575.8753929258095  type: 2  entity: 0
+
+EVENT time: 756.0106204412978  type: 1  entity: 0
+toLayer3: packet being corrupted
+
+EVENT time: 759.7597582934051  type: 2  entity: 1
+
+EVENT time: 771.0106204412978  type: 0  entity: 0
+
+EVENT time: 779.2167729728081  type: 2  entity: 1
+
+EVENT time: 780.3826715903197  type: 2  entity: 0
+
+EVENT time: 904.6357615894041  type: 1  entity: 0
+
+EVENT time: 912.0563676870023  type: 2  entity: 1
+
+EVENT time: 915.8543656727807  type: 1  entity: 0
+
+EVENT time: 918.5453047273172  type: 2  entity: 0
+
+EVENT time: 1034.5042268135626  type: 1  entity: 0
+
+EVENT time: 1043.9150669881285  type: 2  entity: 1
+
+EVENT time: 1049.5042268135626  type: 0  entity: 0
+
+EVENT time: 1051.887203588977  type: 2  entity: 0
+
+EVENT time: 1054.115268410291  type: 2  entity: 1
+
+EVENT time: 1063.4354686117133  type: 2  entity: 0
+aInput(): Duplicate ACK received, ignoring
+
+EVENT time: 1153.0686361278117  type: 1  entity: 0
+
+EVENT time: 1160.1703543198953  type: 2  entity: 1
+
+EVENT time: 1161.6202581865905  type: 2  entity: 0
+
+EVENT time: 1291.1221655934326  type: 1  entity: 0
+
+EVENT time: 1295.749687185278  type: 2  entity: 1
+toLayer3: packet being corrupted
+
+EVENT time: 1297.9041108432266  type: 2  entity: 0
+
+EVENT time: 1306.1221655934326  type: 0  entity: 0
+toLayer3: packet being lost
+
+EVENT time: 1321.1221655934326  type: 0  entity: 0
+
+EVENT time: 1327.6770226142157  type: 2  entity: 1
+
+EVENT time: 1336.1221655934326  type: 0  entity: 0
+toLayer3: packet being corrupted
+
+EVENT time: 1336.6810815759761  type: 2  entity: 0
+
+EVENT time: 1341.2116763817257  type: 2  entity: 1
+
+EVENT time: 1468.3309427167578  type: 1  entity: 0
+Simulator terminated at time 1468.3309427167578
+
+
+===============STATISTICS=======================
+Number of original packets transmitted by A: 9
+Number of retransmissions by A: 6
+Number of data packets delivered to layer 5 at B: 9
+Number of ACK packets sent by B: 12
+Number of corrupted packets: 3
+Ratio of lost packets: 0.1111111111111111
+Ratio of corrupted packets: 0.1111111111111111
+Average RTT: 15.0
+Average communication time: N/A
+==================================================
+
+EXTRA:
+Total packets sent (original + retransmissions): 15
+Window Size: 1
+Retransmission Timeout: 15.0

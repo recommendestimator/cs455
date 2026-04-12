@@ -98,6 +98,44 @@ public class StudentNetworkSimulator extends NetworkSimulator
     // state information for A or B.
     // Also add any necessary methods (e.g. checksum of a String)
 
+    // Vars for A (Sender)
+    private int nextSeqNumA;
+    private Packet currentPacket;
+    private boolean waitingForACK;
+    
+    // Vars for B (Receiver)
+    private int expectedSeqNumB;
+    
+    // Debug vars
+    private int numOriginalPackets;
+    private int numRetransmissions;
+    private int numDeliveredToLayer5;
+    private int numACKsSent;
+    private int numCorruptedPackets;
+    private int totalPacketsSent;
+
+    // Calculates checksum.
+    private int calculateChecksum(Packet packet) {
+        int checksum = 0;
+        checksum += packet.getSeqnum();
+        checksum += packet.getAcknum();
+        String payload = packet.getPayload();
+
+        if (payload != null) {
+            for (int i = 0; i < payload.length(); i++) {
+                checksum += (int) payload.charAt(i);
+            }
+        }
+
+        return checksum;
+    }
+    
+    // Checks if packet is corrupted.
+    private boolean isCorrupted(Packet packet) {
+        int calculatedChecksum = calculateChecksum(packet);
+        return (calculatedChecksum != packet.getChecksum());
+    }
+
     // This is the constructor.  Don't touch!
     public StudentNetworkSimulator(int numMessages,
                                    double loss,
@@ -109,9 +147,18 @@ public class StudentNetworkSimulator extends NetworkSimulator
                                    double delay)
     {
         super(numMessages, loss, corrupt, avgDelay, trace, seed);
-	WindowSize = winsize;
-	LimitSeqNo = winsize*2; // set appropriately; assumes SR here!
-	RxmtInterval = delay;
+        WindowSize = winsize;
+        LimitSeqNo = winsize*2; // set appropriately; assumes SR here!
+        RxmtInterval = delay;
+
+        // Custom init. (for the debugging)
+        numOriginalPackets = 0;
+        numRetransmissions = 0;
+        numDeliveredToLayer5 = 0;
+        numACKsSent = 0;
+        numCorruptedPackets = 0;
+        totalPacketsSent = 0;
+
     }
 
     
@@ -121,7 +168,29 @@ public class StudentNetworkSimulator extends NetworkSimulator
     // the receiving upper layer.
     protected void aOutput(Message message)
     {
+        // Alr waiting for ACK, I can't send a new packet.
+        if (waitingForACK) {
+            return;
+        }
 
+        /* This method does the following:
+            - Make the packet
+            - Sends it to Layer 3
+            - Update debug stats
+            - Beging the timer & update the state
+        */
+        currentPacket = new Packet(nextSeqNumA, -1, 0, message.getData()); // Not an ACK btw (reason why ack = -1)
+        currentPacket.setChecksum(calculateChecksum(currentPacket));
+
+
+        toLayer3(A, currentPacket);
+        
+        numOriginalPackets++;
+        totalPacketsSent++;
+
+        startTimer(A, RxmtInterval);
+        waitingForACK = true;
+       
     }
     
     // This routine will be called whenever a packet sent from the B-side 
@@ -130,7 +199,27 @@ public class StudentNetworkSimulator extends NetworkSimulator
     // sent from the B-side.
     protected void aInput(Packet packet)
     {
+        // packet corruption check
+        if (isCorrupted(packet)) {
+            numCorruptedPackets++;
+            return;
+        }
 
+        // Am I waiting for ACK?
+        // YES
+        if (packet.getAcknum() == nextSeqNumA) {
+            // Got the right ACK
+            stopTimer(A);
+            waitingForACK = false;
+            
+            // Toggle seq. #
+            nextSeqNumA = (nextSeqNumA + 1) % 2;
+        } 
+        // NO
+        else {
+            // Dup ACK
+            System.out.println("aInput(): Duplicate ACK received, ignoring");
+        }
     }
     
     // This routine will be called when A's timer expires (thus generating a 
@@ -139,7 +228,15 @@ public class StudentNetworkSimulator extends NetworkSimulator
     // for how the timer is started and stopped. 
     protected void aTimerInterrupt()
     {
-
+        if (waitingForACK && currentPacket != null) {
+            // Retransmit the current packet
+            toLayer3(A, currentPacket);
+            numRetransmissions++;
+            totalPacketsSent++;
+            
+            // Restart timer
+            startTimer(A, RxmtInterval);
+        }
     }
     
     // This routine will be called once, before any of your other A-side 
@@ -148,7 +245,9 @@ public class StudentNetworkSimulator extends NetworkSimulator
     // of entity A).
     protected void aInit()
     {
-
+        nextSeqNumA = 0;
+        waitingForACK = false;
+        currentPacket = null;
     }
     
     // This routine will be called whenever a packet sent from the B-side 
@@ -157,7 +256,44 @@ public class StudentNetworkSimulator extends NetworkSimulator
     // sent from the A-side.
     protected void bInput(Packet packet)
     {
+        // Packet corruption check
+        if (isCorrupted(packet)) {
+            numCorruptedPackets++;
+            return;
+        }
 
+        // Did I get the right seq. # packet?
+        // YES
+        if (packet.getSeqnum() == expectedSeqNumB) {
+            /* 
+            - Send it over to Layer 5
+            - Make da ACK
+            - Calc. & set the checksum for ACK
+            - Updt. next expected seq. #
+            */
+            toLayer5(packet.getPayload());
+            numDeliveredToLayer5++;
+
+            Packet ackPacket = new Packet(-1, expectedSeqNumB, 0); // Not a data packet (reason why seq = -1, no payload)
+            ackPacket.setChecksum(calculateChecksum(ackPacket));
+            
+
+            toLayer3(B, ackPacket);
+            numACKsSent++;
+
+            expectedSeqNumB = (expectedSeqNumB + 1) % 2;
+        } 
+        // NO (out-of-order OR dup)
+        else {
+            // Resend the ACK from the LAST CORRECTLY RECIEVED packet
+            int lastReceived = (expectedSeqNumB + 1) % 2;
+            
+            Packet ackPacket = new Packet(-1, lastReceived, 0); // is an ACK packet (seq = -1, no payload)
+            ackPacket.setChecksum(calculateChecksum(ackPacket));
+            
+            toLayer3(B, ackPacket);
+            numACKsSent++;
+        }
     }
     
     // This routine will be called once, before any of your other B-side 
@@ -166,29 +302,44 @@ public class StudentNetworkSimulator extends NetworkSimulator
     // of entity B).
     protected void bInit()
     {
-
+        expectedSeqNumB = 0;
     }
 
     // Use to print final statistics
     protected void Simulation_done()
     {
     	// TO PRINT THE STATISTICS, FILL IN THE DETAILS BY PUTTING VARIBALE NAMES. DO NOT CHANGE THE FORMAT OF PRINTED OUTPUT
-    	System.out.println("\n\n===============STATISTICS=======================");
-    	System.out.println("Number of original packets transmitted by A:" + "<YourVariableHere>");
-    	System.out.println("Number of retransmissions by A:" + "<YourVariableHere>");
-    	System.out.println("Number of data packets delivered to layer 5 at B:" + "<YourVariableHere>");
-    	System.out.println("Number of ACK packets sent by B:" + "<YourVariableHere>");
-    	System.out.println("Number of corrupted packets:" + "<YourVariableHere>");
-    	System.out.println("Ratio of lost packets:" + "<YourVariableHere>" );
-    	System.out.println("Ratio of corrupted packets:" + "<YourVariableHere>");
-    	System.out.println("Average RTT:" + "<YourVariableHere>");
-    	System.out.println("Average communication time:" + "<YourVariableHere>");
-    	System.out.println("==================================================");
+        System.out.println("\n\n===============STATISTICS=======================");
+        System.out.println("Number of original packets transmitted by A: " + numOriginalPackets);
+        System.out.println("Number of retransmissions by A: " + numRetransmissions);
+        System.out.println("Number of data packets delivered to layer 5 at B: " + numDeliveredToLayer5);
+        System.out.println("Number of ACK packets sent by B: " + numACKsSent);
+        System.out.println("Number of corrupted packets: " + numCorruptedPackets);
+        
+        // Calculate ratios
+        int totalPackets = totalPacketsSent + numACKsSent;
+        double lostRatio = 0.0;
+        if (totalPackets > 0) {
+            // Lost packets = retransmissions - corrupted (is an approx.)
+            lostRatio = (double)(numRetransmissions - numCorruptedPackets) / totalPackets;
+            if (lostRatio < 0) lostRatio = 0.0;
+        }
+        
+        double corruptRatio = 0.0;
+        if (totalPackets > 0) {
+            corruptRatio = (double)numCorruptedPackets / totalPackets;
+        }
+        
+        System.out.println("Ratio of lost packets: " + lostRatio);
+        System.out.println("Ratio of corrupted packets: " + corruptRatio);
+        System.out.println("Average RTT: " + RxmtInterval); // NOT ACCURATE, I'll re-implement this later (if I get to better tracking) for actual RTT
+        System.out.println("Average communication time: N/A"); // NOT ACCURATE, I need timestamp logs
+        System.out.println("==================================================");
 
     	// PRINT YOUR OWN STATISTIC HERE TO CHECK THE CORRECTNESS OF YOUR PROGRAM
     	System.out.println("\nEXTRA:");
-    	// EXAMPLE GIVEN BELOW
-    	//System.out.println("Example statistic you want to check e.g. number of ACK packets received by A :" + "<YourVariableHere>"); 
+        System.out.println("Total packets sent (original + retransmissions): " + totalPacketsSent);
+        System.out.println("Window Size: " + WindowSize);
+        System.out.println("Retransmission Timeout: " + RxmtInterval);
     }	
-
 }
