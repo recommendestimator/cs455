@@ -219,6 +219,8 @@ public class StudentNetworkSimulator extends NetworkSimulator
             if (ack == expectedDup) {
                 dupAckCount++;
                 if (dupAckCount >= 3) { // Fast Retransmit
+                    System.out.println("TRACE_CASE_4: Triple Duplicate ACK (" + ack + "). Fast Retransmitting base.");
+
                     Packet p = snd_buf[base % WindowSize];
                     if (p != null) {
                         toLayer3(A, p);
